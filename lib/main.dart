@@ -6,12 +6,17 @@ import 'dart:convert';
 
 const request = "https://api.hgbrasil.com/finance?format=json&key=495bfe82";
 
+Future<Map> getData() async {
+  http.Response response = await http.get(request);
+  return json.decode(response.body)["results"];
+}
+
 void main() async {
   print(await getData());
 
   runApp(
     MaterialApp(
-      title: "Contador de pessoas",
+      title: "Conversor de moedas",
       home: Home(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -27,11 +32,6 @@ void main() async {
       ),
     ),
   );
-}
-
-Future<Map> getData() async {
-  http.Response response = await http.get(request);
-  return json.decode(response.body)["results"];
 }
 
 class Home extends StatefulWidget {
